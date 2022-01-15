@@ -1,0 +1,75 @@
+import {
+  Get,
+  Controller,
+  Post,
+  Put,
+  HttpStatus,
+  HttpException,
+  Param,
+  Body,
+} from '@nestjs/common'
+import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core'
+import { InjectRepository } from '@mikro-orm/nestjs'
+
+import { User } from './user.entity'
+
+@Controller('user')
+export class UserController {
+  constructor(
+    @InjectRepository(User)
+    private readonly repository: EntityRepository<User>,
+  ) {}
+
+  @Get()
+  async find() {
+    return await this.repository.findAll(
+      [], // ['books'],
+      { name: QueryOrder.DESC },
+      20,
+    )
+  }
+
+  @Get(':id')
+  async findOne(@Param() id: string) {
+    const model = await this.repository.findOne(
+      +id,
+      // ['books']
+    )
+
+    if (!model) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+
+    return model
+  }
+
+  @Post()
+  async create(@Body() body: any) {
+    if (!body.name || !body.email) {
+      throw new HttpException(
+        'One of `name, email` is missing',
+        HttpStatus.BAD_REQUEST,
+      )
+    }
+
+    const model = new User() // TODO: body.name, body.email
+    wrap(model).assign(body)
+    await this.repository.persist(model)
+
+    return model
+  }
+
+  @Put(':id')
+  async update(@Param() id: string, @Body() body: any) {
+    const model = await this.repository.findOne(+id)
+
+    if (!model) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+
+    wrap(model).assign(body)
+    await this.repository.persist(model)
+
+    return model
+  }
+}
