@@ -17,7 +17,7 @@ export class AppController {
   @Render('index')
   root() {
     const html = renderToString(() => <App />)
-    return { message: 'Hello!!', appHTML: html }
+    return { message: 'Hello 5!!', appHTML: html }
   }
 
   @Get()

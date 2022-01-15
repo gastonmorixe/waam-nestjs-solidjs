@@ -1,3 +1,16 @@
 {
-  "presets": [["solid", { "generate": "ssr", "hydratable": true }]]
+  "presets": [
+    "@babel/preset-typescript",
+    "@babel/preset-env",
+    ["solid", { "generate": "ssr", "hydratable": true }]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+  ]
 }

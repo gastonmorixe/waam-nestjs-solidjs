@@ -12,10 +12,10 @@ import { BaseEntity } from '../base.entity'
 
 @Entity()
 export class User extends BaseEntity {
-  @Property()
+  @Property({ type: 'string' })
   name: string
 
-  @Property()
+  @Property({ type: 'string' })
   email: string
 
   // @Property()
@@ -24,7 +24,7 @@ export class User extends BaseEntity {
   // @Property()
   // termsAccepted = false
 
-  @Property()
+  @Property({ type: Date })
   born?: Date
 
   // @OneToMany(() => Book, (b) => b.author, { cascade: [Cascade.ALL] })

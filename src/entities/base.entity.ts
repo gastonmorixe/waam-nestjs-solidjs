@@ -1,12 +1,14 @@
 import { PrimaryKey, Property } from '@mikro-orm/core'
 
 export abstract class BaseEntity {
-  @PrimaryKey()
+  @PrimaryKey({ type: 'number' })
   id!: number
 
-  @Property()
+  @Property({
+    // type: Date
+  })
   createdAt = new Date()
 
-  @Property({ onUpdate: () => new Date() })
+  @Property({ type: Date, onUpdate: () => new Date() })
   updatedAt = new Date()
 }

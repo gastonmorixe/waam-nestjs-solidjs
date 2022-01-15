@@ -9,9 +9,15 @@
     "node": ">=17.3.1"
   },
   "scripts": {
+    "vite:start": "vite",
+    "vite:dev": "vite",
+    "vite:build": "vite build",
+    "vite:serve": "vite preview",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start:babel": "babel-node dev.js",
+    "start:babel:dev": "nodemon -e js,jsx,ts,tsx,hbs --watch views --watch src --exec \"yarn start:babel\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -27,6 +33,7 @@
     "@mikro-orm/core": "^4.5.10",
     "@mikro-orm/nestjs": "^4.3.1",
     "@mikro-orm/postgresql": "^4.5.10",
+    "@mikro-orm/reflection": "^4.5.10",
     "@mikro-orm/sql-highlighter": "^1.0.1",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
@@ -39,6 +46,14 @@
     "solid-js": "^1.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-proposal-decorators": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/register": "^7.16.9",
+    "@babel/runtime": "^7.16.7",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
@@ -53,6 +68,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.2.5",
     "mikro-orm": "^4.5.10",
+    "nodemon": "^2.0.15",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
@@ -60,7 +76,9 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "vite": "^2.7.12",
+    "vite-plugin-solid": "^2.2.2"
   },
   "jest": {
     "moduleFileExtensions": [
