@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     solidPlugin({
       solid: {
-        // hydratable: true,
+        hydratable: true,
       },
     }),
   ],

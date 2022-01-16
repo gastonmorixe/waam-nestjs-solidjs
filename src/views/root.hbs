@@ -3,17 +3,15 @@
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
     <title>waam</title>
+    {{{hydrationScriptHTML}}}
   </head>
   <body>
     <!-- messsage: -->
     {{message}}
 
-    <!-- ssr solid: -->
-    {{{appHTML}}}
-
     <!-- solid client: -->
-    <div id='root'></div>
+    <div id='root'>{{{appHTML}}}</div>
 
-    <script src='/src/pages/index.tsx' type='module'></script>
+    <script src='/src/pages/root/index.tsx' type='module'></script>
   </body>
 </html>

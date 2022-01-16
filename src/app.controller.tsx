@@ -1,23 +1,25 @@
 import { Controller, Get, Render } from '@nestjs/common'
 import {
   renderToString,
+  generateHydrationScript,
   // renderToStringAsync,
   // renderToStream
 } from 'solid-js/web'
 
 import { AppService } from './app.service'
 
-import { App } from '../views/solid/App'
+import { Root } from './pages/root/Root'
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @Render('index')
+  @Render('root')
   root() {
-    const html = renderToString(() => <App />)
-    return { message: 'Hello 5!!', appHTML: html }
+    const appHTML = renderToString(() => <Root />, { renderId: 'island-0' }) // REFACTOR
+    const hydrationScriptHTML = generateHydrationScript()
+    return { message: 'Hello 6!!', appHTML, hydrationScriptHTML }
   }
 
   @Get()

@@ -17,7 +17,7 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start:babel": "babel-node dev.js",
-    "start:babel:dev": "nodemon -e js,jsx,ts,tsx,hbs --watch views --watch src --exec \"yarn start:babel\"",
+    "start:babel:dev": "nodemon -e js,js,ts,ts,hbs --watch src --exec \"yarn start:babel\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
