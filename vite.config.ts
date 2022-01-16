@@ -3,8 +3,6 @@ import solidPlugin from 'vite-plugin-solid'
 // import { resolve } from 'path'
 
 export default defineConfig({
-  // root
-  // root: resolve(process.cwd(), 'src/pages/'),
   plugins: [
     solidPlugin({
       solid: {

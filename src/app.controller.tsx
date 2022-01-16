@@ -19,7 +19,7 @@ export class AppController {
   root() {
     const appHTML = renderToString(() => <Root />, { renderId: 'island-0' }) // REFACTOR
     const hydrationScriptHTML = generateHydrationScript()
-    return { message: 'Hello 6!!', appHTML, hydrationScriptHTML }
+    return { appHTML, hydrationScriptHTML }
   }
 
   @Get()
