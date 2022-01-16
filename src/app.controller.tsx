@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common'
+import { Controller, Get, Render, Dependencies } from '@nestjs/common'
 import {
   renderToString,
   generateHydrationScript,
@@ -11,8 +11,11 @@ import { AppService } from './app.service'
 import { Root } from './pages/root/Root'
 
 @Controller()
+@Dependencies(AppService)
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {
+    this.appService = appService
+  }
 
   @Get()
   @Render('root')
@@ -22,8 +25,10 @@ export class AppController {
     return { appHTML, hydrationScriptHTML }
   }
 
-  @Get()
-  getHello(): string {
+  @Get('/hello')
+  hello(): string {
+    // return 'hellooooo'
+    // return this.appService
     return this.appService.getHello()
   }
 }
