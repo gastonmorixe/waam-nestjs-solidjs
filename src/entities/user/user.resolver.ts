@@ -23,8 +23,9 @@ export class UserResolver {
     @Args('username', { type: () => String }) username: string,
     @Args('name', { type: () => String }) name: string,
     @Args('email', { type: () => String }) email: string,
+    @Args('password', { type: () => String }) password: string,
   ) {
-    return this.service.create({ username, name, email })
+    return this.service.create({ username, name, email, password })
   }
 
   // @ResolveField()

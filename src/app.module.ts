@@ -6,6 +6,7 @@ import { AppController } from './app.controller'
 import { GraphQLModule } from '@nestjs/graphql'
 import { OrmModule } from './modules/orm/orm.module'
 import { UserModule } from './entities/user/user.module'
+import { SessionModule } from './entities/session/session.module'
 
 // Services
 import { AppService } from './app.service'
@@ -15,6 +16,7 @@ import { AppService } from './app.service'
   imports: [
     OrmModule,
     UserModule,
+    SessionModule,
     GraphQLModule.forRoot({
       debug: true,
       playground: true,

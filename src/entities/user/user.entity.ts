@@ -29,6 +29,9 @@ export class User extends BaseEntity {
   username: string
 
   @Property()
+  password: string
+
+  @Property()
   @Field(() => Date, { nullable: true })
   born?: Date
 

@@ -8,11 +8,11 @@ import { EntityRepository } from '@mikro-orm/core'
 import { InjectRepository } from '@mikro-orm/nestjs'
 import bcrypt from 'bcrypt'
 
-import { User } from './user.entity'
+import { User } from '../user/user.entity'
 
 @Injectable()
 @Dependencies(EntityRepository)
-export class UserService {
+export class SessionService {
   constructor(
     @InjectRepository(User)
     private readonly repository: EntityRepository<User>,
@@ -20,7 +20,7 @@ export class UserService {
     this.repository = repository
   }
 
-  async findByUsername(username: string) {
+  async auth(username: string, password: string) {
     const model = await this.repository.findOne(
       { username },
       // TODO: populate
@@ -30,22 +30,15 @@ export class UserService {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
 
-    return model
-  }
+    const match = await bcrypt.compare(password, model.password)
 
-  async create(props: {
-    username: string
-    email: string
-    name: string
-    password: string
-  }) {
-    const { password, ...rest } = props
-    const passwordHashed = await bcrypt.hash(password, 10)
-    const entity = this.repository.create({
-      password: passwordHashed,
-      ...rest,
-    })
-    await this.repository.persistAndFlush(entity)
-    return entity
+    if (match) {
+      return {
+        jwt: 'TODO-TOKEN',
+        user: model,
+      }
+    }
+
+    throw new Error('Auth failed')
   }
 }
